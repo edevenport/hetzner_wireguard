@@ -19,5 +19,11 @@ server_name           = "wireguard"
 server_type           = "cpx11"
 image                 = "ubuntu-22.04"
 datacenter            = "hil-dc1"
-ssh_key_path          = "/path/to/secrets"
+secret_path           = "/path/to/secrets"
 ```
+
+Stores SSH keys and Wireguard config in `secrets_path`.
+
+## Notes
+
+* Wireguard configuration will not survive a server reboot at this time.
