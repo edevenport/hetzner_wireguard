@@ -22,7 +22,7 @@ data "cloudinit_config" "cloud_config" {
                 "runcmd": [
                   "sysctl -w sysctl -w net.ipv4.ip_forward=1",
                   "ip link add wg0 type wireguard",
-          "ip address add dev wg0 ${cidrhost(var.wg_subnet_cidr, 1)}/${local.wg_netmask_bits}",
+                  "ip address add dev wg0 ${cidrhost(var.wg_subnet_cidr, 1)}/${local.wg_netmask_bits}",
                   "ip link set mtu 65456 up dev wg0",
                   "iptables -A FORWARD -i wg0 -j ACCEPT",
                   "iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE"
