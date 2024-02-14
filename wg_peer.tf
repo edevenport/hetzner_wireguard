@@ -13,3 +13,19 @@ resource "null_resource" "wg_add_peer" {
     ]
   }
 }
+
+resource "local_sensitive_file" "wg_client_config" {
+  content  = <<-EOF
+	[Interface]
+    PrivateKey = ${var.wg_client_private_key}
+    Address = ${cidrhost(var.wg_subnet_cidr, 2)}/32
+    DNS = 1.1.1.1
+    
+    [Peer]
+    PublicKey = ${var.wg_server_public_key}
+    AllowedIPs = 0.0.0.0/0, ::/0
+    Endpoint = ${hcloud_server.wireguard.ipv4_address}:51820
+  EOF
+
+  filename = "${var.secrets_path}/wg_client.conf"
+}

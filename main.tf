@@ -20,5 +20,5 @@ provider "hcloud" {
 module "ssh_keygen" {
   source = "github.com/edevenport/tf_ssh_keygen"
 
-  ssh_key_path = var.ssh_key_path
+  ssh_key_path = var.secrets_path
 }
